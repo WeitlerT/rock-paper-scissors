@@ -1,3 +1,6 @@
+let playerScore = 0;
+let computerScore = 0;
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
@@ -30,7 +33,7 @@ function playRound(playerSelection, computerSelection){
 
     //Check if choice is the same
     if (playerSelection == computerSelection){
-        console.log(`Player selected ${playerSelection} and Computer selected ${computerSelection} its a tie!`)
+        roundResult.replace(`Player selected ${playerSelection} and Computer selected ${computerSelection} its a tie!`);
     }
     //Player selects Rock
     else if (playerSelection == "rock"){
@@ -68,35 +71,40 @@ function playRound(playerSelection, computerSelection){
     return playerWin;
 }
 
-function game(){
-    let playerScore = 0;
-    let computerScore = 0;
-    //We want to play 5 rounds
-    for (i = 1; i <= 5; i++){
-        //Get new values for each round
-        const playerSelection = prompt("Enter rock, paper, or scissors");
-        const computerSelection = getComputerChoice();
-        //Count rounds
-        console.log(`Round ${i}`);
-        //Store the result of playerWin so we can give points
-        let roundResult = playRound(playerSelection,computerSelection);
-        if (roundResult == true){
-            playerScore ++;
-        }
-        else if (roundResult == false){
-            computerScore ++;
-        }
-        console.log(`Player Score: ${playerScore}`);
-        console.log(`Computer score: ${computerScore}`);
+function game(playerSelection)
+{
+    //Get new values for each round
+    const computerSelection = getComputerChoice();
+    //Store the result of playerWin so we can give points
+    let roundResult = playRound(playerSelection,computerSelection);
+    if (roundResult == true){
+        playerScore ++;
     }
-    //Announce the winner and amount of points
-    if (playerScore > computerScore){
-        console.log(`Player wins with ${playerScore} points!`);
+    else if (roundResult == false){
+        computerScore ++;
     }
-    else {
-        console.log(`Computer wins with ${computerScore} points!`);
-    }
+    pScore.replace(`Player Score: ${playerScore}`);
+    cScore.replace(`Computer score: ${computerScore}`);
 }
 
-//Start a 5 round game
-game();
+const rockBtn = document.getElementById('rbtn');
+const papperBtn = document.getElementById('pbtn');
+const scissorBtn = document.getElementById('sbtn');
+let roundResult = document.getElementById('roundResult');
+let pScore = document.getElementById('pScore');
+let cScore = document.getElementById('cScore');
+
+// rockBtn.addEventListener('click',() => {console.log("Hello Rock");});
+// papperBtn.addEventListener('click',() => {console.log("Hello Paper");});
+// scissorBtn.addEventListener('click',() => {console.log("Hello Scissors");});
+rockBtn.addEventListener('click', () =>{
+    game('rock')
+}); 
+
+papperBtn.addEventListener('click', () =>{
+    game('paper')
+}); 
+
+scissorBtn.addEventListener('click', () =>{
+    game('scissors')
+}); 
