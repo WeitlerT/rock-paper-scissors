@@ -1,10 +1,12 @@
 let playerScore = 0;
 let computerScore = 0;
 
+//Random num gen for comp choice
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
-  }
+}
 
+//Pick a choice for comp based off random number gen
 function getComputerChoice(){
     let compChoice;
     //Using random number gen to pick between 0-3
@@ -73,7 +75,6 @@ function playRound(playerSelection, computerSelection){
 
 function game(playerSelection)
 {
-
     //Get new values for each round
     const computerSelection = getComputerChoice();
     //Store the result of playerWin so we can give points
@@ -85,9 +86,11 @@ function game(playerSelection)
         computerScore ++;
     }
 
+    //Track score
     pScore.innerText = (`Player Score: ${playerScore}`);
     cScore.innerText = (`Computer score: ${computerScore}`);
 
+    //Check if either score is at 5 if so end game
     if (playerScore == 5|| computerScore == 5){
         if (playerScore > computerScore){
             winner.innerText = ("Player wins the game!");
@@ -103,6 +106,8 @@ function game(playerSelection)
     }
 }
 
+//Disables buttons so user can't keep playing until game
+//is reset
 function gameEnd(){
     rockBtn.disabled = true;
     scissorBtn.disabled = true;
@@ -110,6 +115,7 @@ function gameEnd(){
     resetBtn.style.visibility = 'visible';
 }
 
+//Clears all fields and resets score for new game
 function resetGame(){
     pScore.innerText = (`Player Score: 0`);
     cScore.innerText = (`Computer score: 0`);
@@ -125,6 +131,7 @@ function resetGame(){
     paperBtn.disabled = false;
 }
 
+//Storing our HTML elements
 const rockBtn = document.getElementById('rbtn');
 const paperBtn = document.getElementById('pbtn');
 const scissorBtn = document.getElementById('sbtn');
@@ -136,8 +143,10 @@ let winner = document.getElementById('winner');
 let compSelection = document.getElementById('compSelection');
 let playSelection = document.getElementById('playerSelection');
 
+//Needs to be hidden by default
 resetBtn.style.visibility = 'hidden';
 
+//Event Listeners
 rockBtn.addEventListener('click', () =>{
     game('rock')
 }); 
