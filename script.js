@@ -33,38 +33,38 @@ function playRound(playerSelection, computerSelection){
 
     //Check if choice is the same
     if (playerSelection == computerSelection){
-        roundResult.replace(`Player selected ${playerSelection} and Computer selected ${computerSelection} its a tie!`);
+        roundResult.innerText = (`Player selected ${playerSelection} and Computer selected ${computerSelection} its a tie!`);
     }
     //Player selects Rock
     else if (playerSelection == "rock"){
         if (computerSelection == "scissors"){
-            console.log(`${playerSelection} crushes ${computerSelection}, player wins!`)
+            roundResult.innerText = (`${playerSelection} crushes ${computerSelection}, player wins!`)
             playerWin = true;  
         }
         else { //paper
-            console.log(`${playerSelection} gets covered by ${computerSelection}, computer wins!`)
+            roundResult.innerText = (`${playerSelection} gets covered by ${computerSelection}, computer wins!`)
             playerWin = false;
         }  
     }
     //Player selects Paper
     else if (playerSelection == "paper"){
         if (computerSelection == "scissors"){
-            console.log(`${playerSelection} gets cut by ${computerSelection}, computer wins!`)
+            roundResult.innerText = (`${playerSelection} gets cut by ${computerSelection}, computer wins!`)
             playerWin = false;  
         }
         else { //rock
-            console.log(`${playerSelection} covers ${computerSelection}, player wins!`)
+            roundResult.innerText = (`${playerSelection} covers ${computerSelection}, player wins!`)
             playerWin = true;
         }  
     }
     //Player selects Scissors
     else if (playerSelection == "scissors"){
         if (computerSelection == "paper"){
-            console.log(`${playerSelection} cuts ${computerSelection}, player wins!`)
+            roundResult.innerText = (`${playerSelection} cuts ${computerSelection}, player wins!`)
             playerWin = true;  
         }
         else { //rock
-            console.log(`${playerSelection} gets crushed by ${computerSelection}, computer wins!`)
+            roundResult.innerText = (`${playerSelection} gets crushed by ${computerSelection}, computer wins!`)
             playerWin = false;
         }  
     }
@@ -73,6 +73,17 @@ function playRound(playerSelection, computerSelection){
 
 function game(playerSelection)
 {
+    if (playerScore == 5|| computerScore == 5){
+        if (playerScore > computerScore){
+            console.log("Player wins the game!");
+            return;
+        }
+        else
+        {
+            console.log("Computer wins the game!");
+            return;
+        }
+    }
     //Get new values for each round
     const computerSelection = getComputerChoice();
     //Store the result of playerWin so we can give points
@@ -83,8 +94,10 @@ function game(playerSelection)
     else if (roundResult == false){
         computerScore ++;
     }
-    pScore.replace(`Player Score: ${playerScore}`);
-    cScore.replace(`Computer score: ${computerScore}`);
+    // console.log(`Player Score: ${playerScore}`);
+    // console.log(`Computer score: ${computerScore}`);
+    pScore.innerText = (`Player Score: ${playerScore}`);
+    cScore.innerText =(`Computer score: ${computerScore}`);
 }
 
 const rockBtn = document.getElementById('rbtn');
@@ -94,9 +107,6 @@ let roundResult = document.getElementById('roundResult');
 let pScore = document.getElementById('pScore');
 let cScore = document.getElementById('cScore');
 
-// rockBtn.addEventListener('click',() => {console.log("Hello Rock");});
-// papperBtn.addEventListener('click',() => {console.log("Hello Paper");});
-// scissorBtn.addEventListener('click',() => {console.log("Hello Scissors");});
 rockBtn.addEventListener('click', () =>{
     game('rock')
 }); 
